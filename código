@@ -1,0 +1,81 @@
+import machine
+import time
+
+
+led1 = machine.Pin(14,machine.Pin.OUT)
+botao1 = machine.Pin(5, machine.Pin.IN, machine.Pin.PULL_UP)
+
+
+led2 = machine.Pin(13,machine.Pin.OUT)
+botao2 = machine.Pin(6, machine.Pin.IN, machine.Pin.PULL_UP)
+
+
+led3 = machine.Pin(12,machine.Pin.OUT)
+botao3 = machine.Pin(7, machine.Pin.IN, machine.Pin.PULL_UP)
+
+c1 = 0
+c2 = 0
+c3 = 0
+
+def desligar_leds(): 
+    led1.off()
+    led2.off()
+    led3.off()
+
+while True:
+    estado = botao1.value()
+    estado2 = botao2.value()
+    estado3 = botao3.value()
+
+
+    if estado == 0:
+        c1 = 1
+        c2 = 0
+        c3 = 0
+    if estado2 == 0:
+        c1 = 0
+        c2 = 1
+        c3 = 0
+    if estado3 == 0:
+        c1 = 0
+        c2 = 0 
+        c3 = 1
+    if c1 == 1:
+        led1.on()
+        led2.off()
+        led3.off()
+        time.sleep(3)
+
+        led1.off()
+        led2.on()
+        led3.off()
+        time.sleep(5)
+
+        led1.off()
+        led2.off()
+        led3.on()
+        time.sleep(1)
+        time.sleep(0.5)
+
+    if c2 == 1:
+
+        led1.on()
+        time.sleep(0.5)
+        led1.off()
+        led2.on()
+        time.sleep(0.5)
+        led2.off()
+        led3.on()
+        time.sleep(0.5)
+        led3.off()
+
+    if c3 == 1:
+    
+        led1.on()
+        led2.on()
+        led3.on()
+        time.sleep(2)
+        led1.off()
+        led2.off()
+        led3.off()
+        time.sleep(1)
